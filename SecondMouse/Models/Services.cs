@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace SecondMouse.Models
-{   [Keyless]
+{   
     public class Services
     {
+        public int Id { get; set; }
         public string state { get; set; }
         public string county { get; set; }
         public bool eFile { get; set; }

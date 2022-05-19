@@ -31,7 +31,7 @@ namespace SecondMouse
 
             services.AddControllers();
             services.AddDbContext<ServicesContext>(opt =>
-                opt.UseInMemoryDatabase("ServicesList"));
+                opt.UseInMemoryDatabase("Services"));
             services.AddDbContext<SigningServicesContext>(opt =>
                 opt.UseInMemoryDatabase("SigningServicesList"));
             services.AddDbContext<TodoContext>(opt =>
@@ -52,6 +52,11 @@ namespace SecondMouse
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SecondMouse v1"));
             }
 
+            var scope = app.ApplicationServices.CreateScope();
+            var servicesContext = scope.ServiceProvider.GetService<ServicesContext>();
+            var signingServicesContext = scope.ServiceProvider.GetService<SigningServicesContext>();
+            AddData(servicesContext, signingServicesContext);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -62,6 +67,127 @@ namespace SecondMouse
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void AddData(ServicesContext servicesContext, SigningServicesContext signingServicesContext)
+        {
+            var service = new Models.Services
+            {
+                Id = 1,
+                state = "NH",
+                county = "Merrimack",
+                eFile = true,
+                RON = true,
+                RIN = false,
+                otherService = true,
+                otherService2 = false
+            };
+            servicesContext.Services.Add(service);
+            service = new Models.Services
+            {
+                Id = 2,
+                state = "NH",
+                county = "Strafford",
+                eFile = true,
+                RON = false,
+                RIN = true,
+                otherService = true,
+                otherService2 = false
+            };
+            servicesContext.Services.Add(service);
+            service = new Models.Services
+            {
+                Id = 3,
+                state = "FL",
+                county = "Orange",
+                eFile = true,
+                RON = false,
+                RIN = false,
+                otherService = true,
+                otherService2 = true
+            };
+            servicesContext.Services.Add(service);
+            service = new Models.Services
+            {
+                Id = 4,
+                state = "FL",
+                county = "Brevard",
+                eFile = false,
+                RON = false,
+                RIN = true,
+                otherService = true,
+                otherService2 = true
+            };
+            servicesContext.Services.Add(service);
+            service = new Models.Services
+            {
+                Id = 5,
+                state = "TX",
+                county = "Harris",
+                eFile = false,
+                RON = true,
+                RIN = false,
+                otherService = false,
+                otherService2 = true
+            };
+            servicesContext.Services.Add(service);
+            service = new Models.Services
+            {
+                Id = 6,
+                state = "TX",
+                county = "Austin",
+                eFile = false,
+                RON = false,
+                RIN = true,
+                otherService = true,
+                otherService2 = false
+            };
+            servicesContext.Services.Add(service);
+
+            servicesContext.SaveChanges();
+
+            var signingService = new Models.SigningServices
+            {
+                Id = 1,
+                name = "Joe Signing Service",
+                email = "jsign@gmail.com",
+                address = "23 Main Street",
+                city = "Concord",
+                state = "NH"
+            };
+            signingServicesContext.SigningServices.Add(signingService);
+            signingService = new Models.SigningServices
+            {
+                Id = 2,
+                name = "Other Signing Service",
+                email = "other@gmail.com",
+                address = "23 Main Street",
+                city = "Concord",
+                state = "NH"
+            };
+            signingServicesContext.SigningServices.Add(signingService);
+            signingService = new Models.SigningServices
+            {
+                Id = 3,
+                name = "The Best Signing Service",
+                email = "bestsign@gmail.com",
+                address = "321 Alligator Drive",
+                city = "Orlando",
+                state = "FL"
+            };
+            signingServicesContext.SigningServices.Add(signingService);
+            signingService = new Models.SigningServices
+            {
+                Id = 4,
+                name = "A Different Signing Service",
+                email = "different@gmail.com",
+                address = "456 Willow Way",
+                city = "Tampa",
+                state = "FL"
+            };
+            signingServicesContext.SigningServices.Add(signingService);
+            signingServicesContext.SaveChanges();
+                
         }
     }
 }
