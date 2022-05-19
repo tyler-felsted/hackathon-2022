@@ -39,5 +39,19 @@ namespace SecondMouse.Controllers
 
             return service;
         }
+
+        [Route("FileServiceCheck")]
+        [HttpPost]
+        public async Task<ActionResult<Services>> PostFileService(File file)
+        {
+            var service = await _context.Services.SingleOrDefaultAsync(s => s.state == file.state && s.county == file.county);
+
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            return service;
+        }
     }
 }
