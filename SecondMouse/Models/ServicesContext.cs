@@ -10,5 +10,6 @@ namespace SecondMouse.Models
         }
 
         public DbSet<Services> Services { get; set; } = null!;
+        public DbSet<SigningServices> SigningServices { get; set; } = null!;
     }
 }
