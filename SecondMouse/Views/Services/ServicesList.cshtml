@@ -1,0 +1,36 @@
+@model List<SecondMouse.Models.Services>
+
+@{ 
+    ViewBag.Title = "Services List";
+}
+
+<h1>Services List</h1>
+<div>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>State</th>
+            <th>County</th>
+            <th>eFile</th>
+            <th>RON</th>
+            <th>RIN</th>
+            <th>Other Service</th>
+            <th>Other Service 2</th>
+        </thead>
+        <tbody>
+            @foreach (var service in Model)
+            {
+            <tr>
+                <td>@service.Id</td>
+                <td>@service.state</td>
+                <td>@service.county</td>
+                <td>@service.eFile</td>
+                <td>@service.RON</td>
+                <td>@service.RIN</td>
+                <td>@service.otherService</td>
+                <td>@service.otherService2</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

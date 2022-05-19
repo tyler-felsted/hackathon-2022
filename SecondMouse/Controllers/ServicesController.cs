@@ -11,13 +11,22 @@ namespace SecondMouse.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicesController : ControllerBase
+    public class ServicesController : Controller
     {
         private readonly ServicesContext _context;
 
         public ServicesController(ServicesContext context)
         {
             _context = context;
+        }
+
+        [Route("ServicesList")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Services>>> ServicesList()
+        {
+            var result = await _context.Services.ToListAsync();
+
+            return View(result);
         }
 
         [Route("FileServiceCheck")]

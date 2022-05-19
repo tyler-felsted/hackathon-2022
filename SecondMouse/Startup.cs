@@ -37,6 +37,8 @@ namespace SecondMouse
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SecondMouse", Version = "v1" });
             });
 
+            services.AddMvc();
+
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
