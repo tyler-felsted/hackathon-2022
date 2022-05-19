@@ -54,6 +54,7 @@ namespace SecondMouse.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return new OkObjectResult("get error");
             }
         }
@@ -68,6 +69,7 @@ namespace SecondMouse.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return new OkObjectResult("put error");
             }
         }
@@ -82,6 +84,7 @@ namespace SecondMouse.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return new OkObjectResult("post error");
             }
         }
@@ -96,6 +99,7 @@ namespace SecondMouse.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return new OkObjectResult("delete error");
             }
         }

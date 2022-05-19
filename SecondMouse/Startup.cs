@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SecondMouse.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SecondMouse
 {
@@ -28,6 +30,8 @@ namespace SecondMouse
         {
 
             services.AddControllers();
+            services.AddDbContext<TodoContext>(opt =>
+                opt.UseInMemoryDatabase("TodoList"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SecondMouse", Version = "v1" });
