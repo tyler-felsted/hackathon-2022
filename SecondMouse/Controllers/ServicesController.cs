@@ -22,11 +22,16 @@ namespace SecondMouse.Controllers
 
         [Route("ServicesList")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Services>>> ServicesList()
+        public async Task<ActionResult<AllServices>> ServicesList()
         {
-            var result = await _context.Services.ToListAsync();
+            var services = await _context.Services.ToListAsync();
+            var signingServices = await _context.SigningServices.ToListAsync();
 
-            return View(result);
+            var allServices = new AllServices();
+            allServices.services = services;
+            allServices.signingServices = signingServices;
+
+            return View(allServices);
         }
 
         [Route("FileServiceCheck")]
