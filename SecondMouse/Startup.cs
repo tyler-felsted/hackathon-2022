@@ -32,8 +32,6 @@ namespace SecondMouse
             services.AddControllers();
             services.AddDbContext<ServicesContext>(opt =>
                 opt.UseInMemoryDatabase("Services"));
-            services.AddDbContext<SigningServicesContext>(opt =>
-                opt.UseInMemoryDatabase("SigningServicesList"));
             services.AddDbContext<TodoContext>(opt =>
                 opt.UseInMemoryDatabase("TodoList"));
             services.AddSwaggerGen(c =>
@@ -54,8 +52,7 @@ namespace SecondMouse
 
             var scope = app.ApplicationServices.CreateScope();
             var servicesContext = scope.ServiceProvider.GetService<ServicesContext>();
-            var signingServicesContext = scope.ServiceProvider.GetService<SigningServicesContext>();
-            AddData(servicesContext, signingServicesContext);
+            AddData(servicesContext);
 
             app.UseHttpsRedirection();
 
@@ -69,7 +66,7 @@ namespace SecondMouse
             });
         }
 
-        private static void AddData(ServicesContext servicesContext, SigningServicesContext signingServicesContext)
+        private static void AddData(ServicesContext servicesContext)
         {
             var service = new Models.Services
             {
@@ -155,7 +152,7 @@ namespace SecondMouse
                 city = "Concord",
                 state = "NH"
             };
-            signingServicesContext.SigningServices.Add(signingService);
+            servicesContext.SigningServices.Add(signingService);
             signingService = new Models.SigningServices
             {
                 Id = 2,
@@ -165,7 +162,7 @@ namespace SecondMouse
                 city = "Concord",
                 state = "NH"
             };
-            signingServicesContext.SigningServices.Add(signingService);
+            servicesContext.SigningServices.Add(signingService);
             signingService = new Models.SigningServices
             {
                 Id = 3,
@@ -175,7 +172,7 @@ namespace SecondMouse
                 city = "Orlando",
                 state = "FL"
             };
-            signingServicesContext.SigningServices.Add(signingService);
+            servicesContext.SigningServices.Add(signingService);
             signingService = new Models.SigningServices
             {
                 Id = 4,
@@ -185,8 +182,8 @@ namespace SecondMouse
                 city = "Tampa",
                 state = "FL"
             };
-            signingServicesContext.SigningServices.Add(signingService);
-            signingServicesContext.SaveChanges();
+            servicesContext.SigningServices.Add(signingService);
+            servicesContext.SaveChanges();
                 
         }
     }
