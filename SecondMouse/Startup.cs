@@ -32,8 +32,6 @@ namespace SecondMouse
             services.AddControllers();
             services.AddDbContext<ServicesContext>(opt =>
                 opt.UseInMemoryDatabase("Services"));
-            services.AddDbContext<TodoContext>(opt =>
-                opt.UseInMemoryDatabase("TodoList"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SecondMouse", Version = "v1" });

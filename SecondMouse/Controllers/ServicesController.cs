@@ -42,16 +42,17 @@ namespace SecondMouse.Controllers
 
         [Route("FileServiceCheck")]
         [HttpPost]
-        public async Task<ActionResult<Services>> PostFileService(File file)
+        public async Task<ActionResult<FileServiceCheck>> PostFileService(File file)
         {
             var service = await _context.Services.SingleOrDefaultAsync(s => s.state == file.state && s.county == file.county);
+            var signingService = await _context.SigningServices.Where(ss => ss.state == file.state).ToListAsync();
 
-            if (service == null)
-            {
-                return NotFound();
-            }
+            FileServiceCheck fileServiceCheckResults = new FileServiceCheck();
+            fileServiceCheckResults.file = file;
+            fileServiceCheckResults.service = service;
+            fileServiceCheckResults.signingServices = signingService;
 
-            return service;
+            return fileServiceCheckResults;
         }
     }
 }
