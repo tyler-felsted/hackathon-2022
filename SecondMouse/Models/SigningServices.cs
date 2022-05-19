@@ -1,5 +1,8 @@
-﻿namespace SecondMouse.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SecondMouse.Models
 {
+    [Keyless]
     public class SigningServices
     {
         public string name { get; set; }

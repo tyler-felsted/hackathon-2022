@@ -32,6 +32,8 @@ namespace SecondMouse
             services.AddControllers();
             services.AddDbContext<ServicesContext>(opt =>
                 opt.UseInMemoryDatabase("ServicesList"));
+            services.AddDbContext<SigningServicesContext>(opt =>
+                opt.UseInMemoryDatabase("SigningServicesList"));
             services.AddDbContext<TodoContext>(opt =>
                 opt.UseInMemoryDatabase("TodoList"));
             services.AddSwaggerGen(c =>
