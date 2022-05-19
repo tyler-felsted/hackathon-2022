@@ -1,5 +1,7 @@
-﻿namespace SecondMouse.Models
-{
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SecondMouse.Models
+{   [Keyless]
     public class Services
     {
         public string state { get; set; }

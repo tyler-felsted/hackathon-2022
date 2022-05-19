@@ -30,6 +30,8 @@ namespace SecondMouse
         {
 
             services.AddControllers();
+            services.AddDbContext<ServicesContext>(opt =>
+                opt.UseInMemoryDatabase("ServicesList"));
             services.AddDbContext<TodoContext>(opt =>
                 opt.UseInMemoryDatabase("TodoList"));
             services.AddSwaggerGen(c =>
