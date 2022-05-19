@@ -35,5 +35,69 @@ namespace SecondMouse.Controllers
             })
             .ToArray();
         }
+
+        [Route("testGet")]
+        [HttpGet]
+        public IActionResult GetActionResult()
+        {
+            try
+            {
+                var rng = new Random();
+                var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(index),
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                })
+                .ToArray();
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                return new OkObjectResult("get error");
+            }
+        }
+
+        [Route("testPut")]
+        [HttpPut]
+        public IActionResult PutActionResult()
+        {
+            try
+            {
+                return new OkObjectResult("put");
+            }
+            catch (Exception ex)
+            {
+                return new OkObjectResult("put error");
+            }
+        }
+
+        [Route("testPost")]
+        [HttpPost]
+        public IActionResult PostActionResult()
+        {
+            try
+            {
+                return new OkObjectResult("post");
+            }
+            catch (Exception ex)
+            {
+                return new OkObjectResult("post error");
+            }
+        }
+
+        [Route("testDelete")]
+        [HttpDelete]
+        public IActionResult DeleteActionResult()
+        {
+            try
+            {
+                return new OkObjectResult("delete");
+            }
+            catch (Exception ex)
+            {
+                return new OkObjectResult("delete error");
+            }
+        }
     }
 }
