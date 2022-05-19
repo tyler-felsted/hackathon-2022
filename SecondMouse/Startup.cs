@@ -36,6 +36,17 @@ namespace SecondMouse
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SecondMouse", Version = "v1" });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        string envOrigins = Environment.GetEnvironmentVariable("EC_GATEWAY_CORS_ORIGINS");
+                        string[] origins = envOrigins.Split(new char[] { ',', ';' }, StringSplitOptions.TrimEntries); // delimited by , or ;
+                        builder.SetIsOriginAllowedToAllowWildcardSubdomains().WithOrigins(origins).AllowAnyHeader().AllowAnyMethod();  // Credit to https://code-maze.com/enabling-cors-in-asp-net-core/
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +66,8 @@ namespace SecondMouse
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
