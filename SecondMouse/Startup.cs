@@ -42,7 +42,7 @@ namespace SecondMouse
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        string envOrigins = Environment.GetEnvironmentVariable("EC_GATEWAY_CORS_ORIGINS");
+                        string envOrigins = "http://localhost,http://*.e-closingsecured.com";
                         string[] origins = envOrigins.Split(new char[] { ',', ';' }, StringSplitOptions.TrimEntries); // delimited by , or ;
                         builder.SetIsOriginAllowedToAllowWildcardSubdomains().WithOrigins(origins).AllowAnyHeader().AllowAnyMethod();  // Credit to https://code-maze.com/enabling-cors-in-asp-net-core/
                     });
